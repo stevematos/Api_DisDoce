@@ -62,7 +62,8 @@ class PDFView(APIView):
         #docente_pagina_web= informacion_docente.pag_web
         docente_fecha_nac= informacion_docente.fecha_nac
         docente_pais= informacion_docente.pais
-        docente_direccion= informacion_docente.direccion
+        print(informacion_docente.direccion)
+        docente_direccion= '' if (informacion_docente.direccion==None) else informacion_docente.direccion
         #docente_sunedu_le= informacion_docente.sunedu_ley
         #docente_categoria= informacion_docente.categoria
         #docente_regimen_dedicacion= informacion_docente.regimen_dedicacion
@@ -100,11 +101,10 @@ class PDFView(APIView):
             ciclo = Ciclo.objects.get(id_ciclo=idciclo)
         except Ciclo.DoesNotExist:
             return Response('NO EXISTE CICLO', status=status.HTTP_400_BAD_REQUEST)
-        
-        if docente_direccion:
-            if len(docente_direccion)>=fin_direccion :
-                if docente_direccion[fin_direccion]!=' ':
-                    direccion_caracter_siguiente_linea='-'
+
+        if len(docente_direccion)>=fin_direccion :
+            if docente_direccion[fin_direccion]!=' ':
+                direccion_caracter_siguiente_linea='-'
 
 
         docente_genero_radio = {'Masculino':False,'Femenino':False}
