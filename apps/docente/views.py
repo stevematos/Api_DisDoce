@@ -100,10 +100,11 @@ class PDFView(APIView):
             ciclo = Ciclo.objects.get(id_ciclo=idciclo)
         except Ciclo.DoesNotExist:
             return Response('NO EXISTE CICLO', status=status.HTTP_400_BAD_REQUEST)
-
-        if len(docente_direccion)>=fin_direccion :
-            if docente_direccion[fin_direccion]!=' ':
-                direccion_caracter_siguiente_linea='-'
+        
+        if docente_direccion:
+            if len(docente_direccion)>=fin_direccion :
+                if docente_direccion[fin_direccion]!=' ':
+                    direccion_caracter_siguiente_linea='-'
 
 
         docente_genero_radio = {'Masculino':False,'Femenino':False}
